@@ -30,7 +30,7 @@ const DocumentUploader: React.FC = () => {
     const file = event.target.files?.[0];
     setSelectedFile(file || null);
   };
-if (selectedFile.type === "application/pdf") {
+
   const uploadFile = async () => {
     setButtonStatus("uploading");
     await API.get("serverless-chat", "/generate_presigned_url", {
@@ -48,26 +48,8 @@ if (selectedFile.type === "application/pdf") {
       });
     });
   };
-}
-else if  (selectedFile.type === "application/csv") {
-  const uploadFile = async () => {
-    setButtonStatus("uploading");
-    await API.get("serverless-chat", "/generate_presigned_url", {
-      headers: { "Content-Type": "application/json" },
-      queryStringParameters: {
-        file_name: selectedFile?.name,
-      },
-    }).then((presigned_url) => {
-      fetch(presigned_url.presignedurl, {
-        method: "PUT",
-        body: selectedFile,
-        headers: { "Content-Type": "application/csv" },
-      }).then(() => {
-        setButtonStatus("success");
-      });
-    });
-  };
-}
+
+
 
   const resetInput = () => {
     setSelectedFile(null);
