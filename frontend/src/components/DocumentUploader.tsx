@@ -18,7 +18,7 @@ const DocumentUploader: React.FC = () => {
     if (selectedFile) {
       if (selectedFile.type === "application/pdf") {
         setInputStatus("valid");
-      } else if  (selectedFile.type === "application/csv") {
+      } else if  (selectedFile.type === ".csv") {
         setInputStatus("valid");
       } else {
         setSelectedFile(null);
